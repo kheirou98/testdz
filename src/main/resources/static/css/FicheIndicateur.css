@@ -1,0 +1,62 @@
+@charset "ISO-8859-1";
+#donneesTable {
+	border:thin  solid #045491;
+	collapse: collapse;
+	width: 100%;
+	margin-bottom:0px;
+}
+#donneesTable tr {
+	border: thin solid #045491;
+	width: 50%;
+	padding: 5px;
+}
+
+#donneesTable .text-center {
+	margin-bottom:5px; 
+	margin-top:5px; 
+	font-family: Arial;
+	color:#FFFFFF;
+	font-weight: bold; 
+	font-size: 14px;
+	border: thin solid  #FFFFF;
+	width: 98.5%;
+	text-align: center;
+	padding: 5px;
+	background-color: #045491;
+}
+#donneesTable th {
+	color:#000;
+	font-weight: bold; 
+	background-color: #D0E3FA;
+	border: thin solid #045491;
+	width: 30%; 
+
+}
+#donneesTable td {
+	font-family: Arial;
+	color :#6f97c5;
+	border: thin solid #045491;
+	padding: 5px;
+	text-align: left;
+	background-color: #ffffff;
+}
+.modal-header {
+	padding-top:5px; 
+	padding-bottom:5px
+}
+.modal-header {
+	background-color:#47A3CA;
+}
+.close {
+	color:white;
+	opacity: .75;
+}
+.close:focus, .close:hover {
+    color: white;
+    text-decoration: none;
+    opacity: 1;
+}
+#classModalLabel{
+	color:white;
+}
+

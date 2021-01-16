@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="utf-8" http-equiv="pragma" content="no-cache">
+<title>List des axes  </title>
+<script src="../webjars/jquery/3.0.0/jquery.min.js" ></script>
+<script src="../webjars/popper.js/1.12.9-1/umd/popper.min.js" ></script>
+<script src="../webjars/bootstrap/4.0.0-2/js/bootstrap.min.js" ></script>
+<script type="text/javascript" th:src=@{../js/main.js} src="../js/main.js"></script>
+<link href="../webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+<link href="../webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"></link>
+ <link rel="stylesheet" href="../css/sidebar.css">
+</head>
+<body>
+ <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-dark justify-content-between" id="navhor">
+ 	 
+ 	 <a href="#"><img src="/images/elit.jpg"  height="30" width="150" alt=""></a>
+ 	 <a class="nav-link" href="/admin" style="color:white;"> <i class="fa fa-home"></i> Accueil</a>
+        	<a class="nav-link" >  
+        		<i class="fa fa-hourglass-half" style="color:white;"></i> 
+        		<span th:text=" 'Période :' " style="color:white;"></span>
+        		<span id="mois" th:text="${periode.mois} " style="color:white;"></span>
+        		<span id="annee" th:text="${periode.annee}" style="color:white;"></span>
+        	</a>
+	     <div class="nav-item dropdown active"> 
+	     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color:white;"> 
+	      <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+	      <span th:text="${user.lastName}+'.'+ ${user.name}" style="color:white;"></span>
+	     </a>
+	        <div class="dropdown-menu">
+	       			 <a th:href="@{/logout}" class="dropdown-item"><i class="fa fa-sign-out" ></i> Se déconnecter </a>    			
+	        	</div>
+	       </div>
+
+    
+    </nav> 
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fa fa-bars"></i>
+  </a>
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+       <div class="sidebar-menu">
+         <div id="close-sidebar">
+          	<i class="fa fa-bars"></i>
+          	<a>                        </a>
+         </div> 
+         <ul>
+         <li>
+            <a href="/admin">
+             <i class="fa fa-home"></i>
+              <span>Accueil</span>
+            </a>
+          </li>
+          <li>
+            <a href="/Gestionperiode">
+             <i class="fa fa-hourglass-half" aria-hidden="true"></i>
+              <span> Gestion de la période </span>
+            </a>
+          </li>
+          <li class="sidebar-dropdown">
+            <a>
+	           <i class="fa fa-bar-chart" aria-hidden="true"></i>
+	           <span>Gestion des indicateurs</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>    
+                  <a href="/getAllindicateur" >
+                  <i class="fa fa-line-chart" aria-hidden="true"></i>
+              		<span> Gérer les indicateurs</span>
+                  </a>
+                </li>
+                <li> 
+                  <a href="/getAffectationRole" >
+	                  <i class="fa fa-id-badge" aria-hidden="true"></i>
+	                  Affectation des rôles
+	              </a>
+                </li>
+               <li>
+                 
+                  <a href="/getAllEtat" >
+                  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                  Bilan des indicateurs</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a  href="#" > 
+            	 <i class="fa fa-address-card" aria-hidden="true"></i> 
+            	 <span>Gestion des utilisateurs</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+	                 <a href="/users" >
+		                 <i class="fa fa-users" aria-hidden="true"></i>
+		                 Gérer utilisateur
+	                 </a>
+                </li>
+                <li>
+                 <a href="/register" > 
+                 <i class="fa fa-user-plus" aria-hidden="true"></i>
+                  Ajouter Utilisateur</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+                 <a href="/getallaxe"> 
+                 <i class="fa fa-sitemap" aria-hidden="true"></i>
+                 Gestion des axes
+                 </a>
+            </li>
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+  </nav>
+    <br></br>
+    <main class="page-content">
+   <p style="left:0px; text-size:5px;"> <i class="fa fa-tasks" aria-hidden="true"></i> Gestion des axes</p>
+   <hr>
+    <div class="container-fluid"> 
+   
+      <div class="row">
+        <div class="form-group col-md-12">
+  
+  <div layout:fragment="content" class="container mySpace">
+   		<form class="form-inline">
+	   		<div class="form-gorup mb-2" >
+	   			<a class="btn btn-primary" id="add" data-toggle="modal" data-target="#addModal" style="color:white;"><i class="fa fa-plus" ></i> Ajouter axe </a>
+	   		</div>
+   		</form>
+   		<fieldset class ="card-body" style="border : 3px groove #4C9E80; ">
+   		
+					<legend style="font-size:18px;color:white; background-color:#4C9E80;"> <i class="fa fa-list-ul" aria-hidden="true" style="left:25px;"></i> Liste des axes</legend>
+
+   			
+   				<table class="table table-bordered" >
+   					<thead class="thead-light">
+   					  <tr>
+   					    <th scope ="col"> ID </th>
+   					  	<th scope ="col"> Axe </th>
+   					  	<th scope ="col"> Description </th>
+   					  	<th scope ="col"> Modifier </th>
+   					  	<th scope ="col"> Supprimer </th>
+   					  	<th scope ="col"> Détails </th>
+   					  	
+   					  </tr>
+   					</thead>
+   					<tbody>
+   					<tr th:if="${axes.empty}">
+		            			<td colspan="5"> Pas d'axe ajouté </td>
+		       				 </tr>
+   						<tr  th:each="axe:${axes}"> 
+   							<th scope ="row" th:text="${axe.id_axe}"></th>
+   							<td th:text="${axe.axe_name}"> </td>
+   							<td th:text="${axe.axe_description}" class="w-50"> </td>
+   							<td style="text-align:center" class="w-0">
+   								<a  th:href="@{/getOne/(id=${axe.id_axe})}" class="btn btn-primary">
+   									<i  class="fa fa-pencil-square-o" ></i></a>
+   							</td>
+   							<td style="text-align:center">
+   								<a th:href="@{/deleteaxe/(id=${axe.id_axe})}"  class="btn btn-danger" id="deletebutton" >
+   									<i class="fa fa-trash-o fa-lg"></i> 
+   								</a>
+   							</td>
+   							<td style="text-align:center">
+   								<a th:href="@{/detailsdomaine/{id}(id=${axe.id_axe})}"  class="btn btn-success" id="details" >
+   									<i class="fa fa-eye"></i></a>
+   							</td>
+   						</tr>
+   					</tbody>
+   				
+   				</table>
+   			</fieldset>
+   		</div>
+   		</div>
+   		</div>
+   		</div>
+   		</main>
+   		</div> 	
+
+<div class="myForm" >
+	<form th:action="@{/addnewaxe}" method ="post">
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="editModalLabel"> Création d'un nouvel Axe </h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        
+		          
+		           <div class="form-group">
+		            <label for="nom" class="col-form-label" Style="width:auto;margin-right: 45px;"> Nom : </label>
+		            <input type="text" class="form-control" name="axe_name" id="name" Style="width:380px">
+		           
+		          </div>
+		           <div class="form-group">
+		            <label for="description" class="col-form-label" Style="width:auto;margin-right: 4px;"> Description : </label>
+		            <input type="text" class="form-control"  name="axe_description" id="description" Style="width:380px;">
+		              
+		          </div>
+		         
+		          
+
+		        	      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+		        <input type="submit" class="btn btn-success" value="Enregistrer">
+		        <span th:utext="${successMessage}"></span>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</form>
+	
+</div>
+
+<div class="myFormEdit" >
+	<form th:action="@{/updateaxe}" method ="put">
+		<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="editModalLabel"> Modification de l'axe </h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        
+		       <div class="form-group" Style="display:none;">
+		            <label for="nom" class="col-form-label"> ID </label>
+		            <input  type="text" readonly="readonly" class="form-control" name="id_axe" id="IdEdit">
+		            
+		          </div>
+		           <div class="form-group">
+		            <label for="nom" class="col-form-label" Style="width:auto;margin-right: 45px;"> Nom : </label>
+		            <input type="text" class="form-control" name="axe_name" id="nameEdit" Style="width:380px">
+		            
+		          </div>
+		           <div class="form-group">
+		            <label for="description" class="col-form-label"Style="width:auto;margin-right: 4px;"> Description : </label>
+		            <input type="text" class="form-control"   name="axe_description" id="descriptionEdit" Style="width:380px;">
+		          
+		          </div>
+		          
+
+		        	      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+		        <input type="submit" class="btn btn-success" value="Enregistrer">
+		        
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</form>
+	
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Suppression de l'axe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Etes-vous sûr de supprimer cet axe?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"> Non </button>
+        <a  class="btn btn-success" id="delref"> Oui </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
